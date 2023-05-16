@@ -1,4 +1,4 @@
-INSERT INTO accounts (id,owner,balance)
+INSERT INTO accounts (owner,balance)
 VALUES
-(1, 'Luis', 100),
-(2, 'Margarida', 200);
+('Luis', 100),
+('Margarida', 200);
