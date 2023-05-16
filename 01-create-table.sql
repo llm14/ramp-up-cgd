@@ -1,0 +1,8 @@
+-- CREATE TABLE
+DROP TABLE IF EXISTS accounts;
+CREATE TABLE accounts (
+    id SERIAL PRIMARY KEY,
+    owner VARCHAR NOT NULL,
+    balance NUMERIC
+);
+
