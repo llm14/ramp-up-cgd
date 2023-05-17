@@ -1,4 +1,4 @@
 INSERT INTO accounts (owner,balance)
 VALUES
-('Luis', 100),
-('Margarida', 200);
+('Cardozo', 50000),
+('Jonas', 50000);

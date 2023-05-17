@@ -1,7 +1,8 @@
 services:
+
   postgres:
     build:
-      context: .
+      context: ./docker/db
       dockerfile: Dockerfile
     image: "postgres-cgd-compose"
     container_name: ${PG_CONTAINER_NAME}
@@ -10,11 +11,22 @@ services:
       POSTGRES_USER: ${POSTGRES_USER}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
       PGDATA: ${PGDATA}
+
     volumes:
       - db_cgd_volume:/data/postgres-db-cgd
     ports:
       - "5432:5432"
     restart: unless-stopped
+#
+#  ramp_up_cgd_app:
+#    container_name: ramp_up_cgd_app
+#    image: lcrodriguescsw/ramp_up_cgd_app:1.0.0
+#    build: .
+#    ports:
+#      - 8080:8080
+#    depends_on:
+#      - postgres
+
 volumes:
   db_cgd_volume:
     external: true
