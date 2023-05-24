@@ -1,55 +1,55 @@
 package cgd.rampupcgd;
 
+import cgd.rampupcgd.exceptions.AccountNotFoundException;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.ResponseStatus;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
 public class AccountService {
 
-  private final AccountsRepository accountsRepository;
+  @Autowired
+  private AccountsRepository accountsRepository;
 
-  public List<Account> allAccounts(){
-    return accountsRepository.findAll();
+  private ExternalApiService externalApiService;
+
+  public List<AccountDto> allAccounts() {
+    return AccountDtoMapper.INSTANCE.toAccountDtoList(accountsRepository.findAll());
   }
 
-  public Account getAccountById(Long id){
-    return accountsRepository.findById(id).get();
-  }
-
-  public Account addAccount (Account account){
-    return accountsRepository.save(account);
-  }
-
-  public Account updateAccount (Long id, Account updateAccount) throws AccountNotFoundException{
-
-    Optional<Account> account = accountsRepository.findById(id);
-    if (account.isPresent()) {
-      account.get().setOwner(updateAccount.getOwner());
-      account.get().setBalance(updateAccount.getBalance());
-      return accountsRepository.save(account.get());
+  public AccountDto getAccountById(Long id) {
+    Optional<Account> accountOptional = accountsRepository.findById(id);
+    if (accountOptional.isPresent()) {
+      Account account = accountOptional.get();
+      return AccountDtoMapper.INSTANCE.toAccountDto(account);
     } else
-      throw new AccountNotFoundException("Account " + id + " does not exist");
+      throw new IllegalArgumentException("This account does not exist");
   }
 
-  public void deletedAccount(Long id){
+  public AccountDto addAccount(Account account) {
+    return AccountDtoMapper.INSTANCE.toAccountDto(accountsRepository.save(account));
+  }
+
+  public AccountDto updateAccount(Long id, Account updateAccount) throws AccountNotFoundException {
+      Account account = accountsRepository.findById(id)
+          .orElseThrow(() -> new AccountNotFoundException(id));
+
+      account.setOwner(updateAccount.getOwner());
+      account.setBalance(updateAccount.getBalance());
+      return AccountDtoMapper.INSTANCE.toAccountDto(account);
+  }
+
+  public void deletedAccount(Long id) {
     accountsRepository.deleteById(id);
 
   }
 
-  @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
-  @ExceptionHandler(AccountNotFoundException.class)
-  public Map<String, String> handleAccountNotFoundException(AccountNotFoundException exception) {
-    Map<String, String> map =  new HashMap<>();
-    map.put("errorMessage", exception.getMessage());
-    return map;
+  public AccountDto getThings() {
+    return externalApiService.getJsonFromExternalApi();
   }
+
 }

@@ -2,65 +2,265 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<parent>
-		<groupId>org.springframework.boot</groupId>
-		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>3.0.6</version>
-		<relativePath/> <!-- lookup parent from repository -->
-	</parent>
+<!--	<parent>-->
+<!--		<groupId>org.springframework.boot</groupId>-->
+<!--		<artifactId>spring-boot-starter-parent</artifactId>-->
+<!--		<version>3.0.6</version>-->
+<!--		<relativePath/> &lt;!&ndash; lookup parent from repository &ndash;&gt;-->
+<!--	</parent>-->
 	<groupId>cgd</groupId>
 	<artifactId>ramp-up-cgd</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>ramp-up-cgd</name>
 	<description>testing ramp-up-cgd</description>
 	<properties>
-		<java.version>17</java.version>
+		<archunit.version>0.14.1</archunit.version>
+		<flying-saucer.version>9.1.20</flying-saucer.version>
+		<flyway-core.version>6.4.4</flyway-core.version>
+		<gson.version>2.8.6</gson.version>
+		<hibernate-types.version>2.9.12</hibernate-types.version>
+		<hibernate-envers.version>5.4.20.Final</hibernate-envers.version>
+		<jacoco.maven.plugin.version>0.8.5</jacoco.maven.plugin.version>
+		<java.version>11</java.version>
+		<junit.version>5.2.0</junit.version>
+		<logstash.version>6.3</logstash.version>
+		<logbook.version>2.2.0</logbook.version>
+		<lombok.version>1.18.22</lombok.version>
+		<mapstruct.version>1.4.2.Final</mapstruct.version>
+		<maven.compiler.plugin.version>3.8.1</maven.compiler.plugin.version>
+		<maven.failsafe.plugin.version>2.22.2</maven.failsafe.plugin.version>
+		<maven.surefire.plugin.version>2.22.2</maven.surefire.plugin.version>
+		<mockito.version>3.3.3</mockito.version>
+		<oa.version>0.12.2</oa.version>
+		<postgresql.version>42.3.1</postgresql.version>
+		<postjava.version>1.0.1</postjava.version>
+		<problems.version>0.25.2</problems.version>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<rest-assured.version>4.3.0</rest-assured.version>
+		<shedlock.version>4.14.0</shedlock.version>
+		<spring-cloud-dependencies.version>Hoxton.SR6</spring-cloud-dependencies.version>
+		<spring-cloud-openfeign.version>2.2.2.RELEASE</spring-cloud-openfeign.version>
+		<spring-cloud-stream.version>3.1.1</spring-cloud-stream.version>
+		<spring.boot.state.machine.version>2.2.0.RELEASE</spring.boot.state.machine.version>
+		<spring.boot.version>2.3.0.RELEASE</spring.boot.version>
+		<spring.security.test.version>5.3.3.RELEASE</spring.security.test.version>
+		<springdoc.version>1.4.8</springdoc.version>
+		<testcontainers.version>1.15.3</testcontainers.version>
+		<thymeleaf.version>3.0.12.RELEASE</thymeleaf.version>
+		<wiremock.version>2.26.3</wiremock.version>
+		<awaitility.version>4.0.2</awaitility.version>
+		<jsoup.version>1.15.3</jsoup.version>
+		<micrometer.version>1.5.4</micrometer.version>
+		<janino.version>3.1.2</janino.version>
+		<caffeine.version>2.8.6</caffeine.version>
+		<bpm-commons-service.version>2.2.0</bpm-commons-service.version>
+		<appache-collections.version>4.2</appache-collections.version>
+		<json.path.version>2.4.0</json.path.version>
+		<apache-poi.version>5.0.0</apache-poi.version>
+		<jwt.jose.version>0.7.6</jwt.jose.version>
+		<togglz.version>3.0.0</togglz.version>
+		<iban4j.vsersion>3.2.4-RELEASE</iban4j.vsersion>
+		<!--Dependency-Check Plugin for SonarQube-->
+		<sonar.dependencyCheck.htmlReportPath>
+			${project.build.directory}/dependency-checker-reports/dependency-check-report.html
+		</sonar.dependencyCheck.htmlReportPath>
+		<sonar.dependencyCheck.severity.blocker>9.0</sonar.dependencyCheck.severity.blocker>
+		<sonar.dependencyCheck.severity.critical>7.0</sonar.dependencyCheck.severity.critical>
+		<sonar.dependencyCheck.severity.major>4.0</sonar.dependencyCheck.severity.major>
+		<sonar.dependencyCheck.severity.minor>0.0</sonar.dependencyCheck.severity.minor>
+		<sonar.dependencyCheck.summarize>false</sonar.dependencyCheck.summarize>
+		<sonar.dependencyCheck.securityHotspot>false</sonar.dependencyCheck.securityHotspot>
 	</properties>
-	<dependencies>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-web</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-test</artifactId>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-data-jpa</artifactId>
-			<version>3.0.6</version>
-		</dependency>
-		<dependency>
-			<groupId>jakarta.persistence</groupId>
-			<artifactId>jakarta.persistence-api</artifactId>
-			<version>3.1.0</version>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.data</groupId>
-			<artifactId>spring-data-jpa</artifactId>
-			<version>3.0.4</version>
-		</dependency>
-		<dependency>
-			<groupId>org.postgresql</groupId>
-			<artifactId>postgresql</artifactId>
-			<version>42.3.1</version>
-		</dependency>
-		<dependency>
-			<groupId>org.projectlombok</groupId>
-			<artifactId>lombok</artifactId>
-			<version>1.18.26</version>
-			<scope>provided</scope>
-		</dependency>
-	</dependencies>
 
 	<build>
 		<plugins>
 			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<annotationProcessorPaths>
+						<path>
+							<artifactId>mapstruct-processor</artifactId>
+							<groupId>org.mapstruct</groupId>
+							<version>${mapstruct.version}</version>
+						</path>
+						<path>
+							<artifactId>lombok</artifactId>
+							<groupId>org.projectlombok</groupId>
+							<version>${lombok.version}</version>
+						</path>
+						<path>
+							<groupId>org.projectlombok</groupId>
+							<artifactId>lombok-mapstruct-binding</artifactId>
+							<version>0.2.0</version>
+						</path>
+					</annotationProcessorPaths>
+					<source>${java.version}</source>
+					<target>${java.version}</target>
+				</configuration>
+				<groupId>org.apache.maven.plugins</groupId>
+				<version>${maven.compiler.plugin.version}</version>
 			</plugin>
+
+			<plugin>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<configuration>
+					<excludes>
+						<exclude>**/*IntegrationTest.java</exclude>
+					</excludes>
+				</configuration>
+				<groupId>org.apache.maven.plugins</groupId>
+				<version>${maven.surefire.plugin.version}</version>
+			</plugin>
+			<plugin>
+				<artifactId>maven-failsafe-plugin</artifactId>
+				<configuration>
+					<additionalClasspathElements>
+						<additionalClasspathElement>${basedir}/target/classes</additionalClasspathElement>
+					</additionalClasspathElements>
+					<includes>
+						<include>**/*IntegrationTest.java</include>
+					</includes>
+					<skip>false</skip>
+				</configuration>
+				<executions>
+					<execution>
+						<goals>
+							<goal>integration-test</goal>
+							<goal>verify</goal>
+						</goals>
+					</execution>
+				</executions>
+				<groupId>org.apache.maven.plugins</groupId>
+				<version>${maven.failsafe.plugin.version}</version>
+			</plugin>
+
 		</plugins>
 	</build>
+
+	<dependencyManagement>
+		<dependencies>
+			<!-- Spring -->
+			<dependency>
+				<artifactId>spring-cloud-dependencies</artifactId>
+				<groupId>org.springframework.cloud</groupId>
+				<scope>import</scope>
+				<type>pom</type>
+				<version>${spring-cloud-dependencies.version}</version>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+
+	<dependencies>
+
+		<!-- Spring -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-aop</artifactId>
+			<version>${spring.boot.version}</version>
+		</dependency>
+		<dependency>
+			<artifactId>spring-boot-starter-web</artifactId>
+			<groupId>org.springframework.boot</groupId>
+			<version>${spring.boot.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-jpa</artifactId>
+			<version>${spring.boot.version}</version>
+		</dependency>
+		<dependency>
+			<artifactId>spring-boot-starter-actuator</artifactId>
+			<groupId>org.springframework.boot</groupId>
+			<version>${spring.boot.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-validation</artifactId>
+			<version>${spring.boot.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<version>${spring.boot.version}</version>
+			<scope>test</scope>
+			<exclusions>
+				<exclusion>
+					<groupId>org.junit.vintage</groupId>
+					<artifactId>junit-vintage-engine</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+
+		<dependency>
+			<groupId>org.zalando</groupId>
+			<artifactId>problem-spring-web</artifactId>
+			<version>${problems.version}</version>
+		</dependency>
+		<!-- Cache -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-cache</artifactId>
+			<version>${spring.boot.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.github.ben-manes.caffeine</groupId>
+			<artifactId>caffeine</artifactId>
+			<version>${caffeine.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.postgresql</groupId>
+			<artifactId>postgresql</artifactId>
+			<version>${postgresql.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>io.swagger.core.v3</groupId>
+			<artifactId>swagger-annotations</artifactId>
+			<version>2.2.10</version>
+		</dependency>
+
+		<!-- Utils -->
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<version>${lombok.version}</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<artifactId>mapstruct</artifactId>
+			<groupId>org.mapstruct</groupId>
+			<version>${mapstruct.version}</version>
+		</dependency>
+		<dependency>
+			<artifactId>mapstruct-processor</artifactId>
+			<groupId>org.mapstruct</groupId>
+			<version>${mapstruct.version}</version>
+		</dependency>
+		<dependency>
+			<artifactId>spring-cloud-starter-openfeign</artifactId>
+			<groupId>org.springframework.cloud</groupId>
+			<version>${spring-cloud-openfeign.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>io.github.openfeign.form</groupId>
+			<artifactId>feign-form-spring</artifactId>
+			<version>3.3.0</version>
+		</dependency>
+		<dependency>
+			<groupId>com.vladmihalcea</groupId>
+			<artifactId>hibernate-types-52</artifactId>
+			<version>${hibernate-types.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-envers</artifactId>
+			<version>${hibernate-envers.version}</version>
+		</dependency>
+		<!--Apache CollectionUtils -->
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-collections4</artifactId>
+			<version>${appache-collections.version}</version>
+		</dependency>
+	</dependencies>
 
 </project>

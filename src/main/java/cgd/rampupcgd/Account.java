@@ -1,56 +1,52 @@
 package cgd.rampupcgd;
 
-import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
 @Table(name = "accounts")
+@AllArgsConstructor
+@NoArgsConstructor
 public class Account {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private Long id;
 
-    @Column(name = "owner")
-    private String owner;
+  @Column(name = "owner")
+  private String owner;
 
-    @Column(name = "balance")
-    private Long balance;
+  @Column(name = "balance")
+  private Long balance;
 
-    public Account() {
-    }
+  public Long getId() {
+    return id;
+  }
 
-    public Account(String owner, Long balance) {
-        this.owner = owner;
-        this.balance = balance;
-    }
+  public void setId(Long id) {
+    this.id = id;
+  }
 
-    public Account(Long id, String owner, Long balance) {
-        this.id = id;
-        this.owner = owner;
-        this.balance = balance;
-    }
+  public String getOwner() {
+    return owner;
+  }
 
-    public Long getId() {
-        return id;
-    }
+  public void setOwner(String owner) {
+    this.owner = owner;
+  }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+  public Long getBalance() {
+    return balance;
+  }
 
-    public String getOwner() {
-        return owner;
-    }
-
-    public void setOwner(String owner) {
-        this.owner = owner;
-    }
-
-    public Long getBalance() {
-        return balance;
-    }
-
-    public void setBalance(Long balance) {
-        this.balance = balance;
-    }
+  public void setBalance(Long balance) {
+    this.balance = balance;
+  }
 }
