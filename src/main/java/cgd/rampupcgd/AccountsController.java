@@ -66,7 +66,7 @@ public class AccountsController {
   }
 
   @GetMapping("/external")
-  public AccountDto getRandomThingFromApi(){
+  public ExternalRandomObject getRandomThingFromApi(){
     return accountService.getThings();
   }
 

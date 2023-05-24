@@ -15,6 +15,7 @@ public class AccountService {
   @Autowired
   private AccountsRepository accountsRepository;
 
+  @Autowired
   private ExternalApiService externalApiService;
 
   public List<AccountDto> allAccounts() {
@@ -50,7 +51,7 @@ public class AccountService {
 
   }
 
-  public AccountDto getThings() {
+  public ExternalRandomObject getThings() {
     return externalApiService.getJsonFromExternalApi();
   }
 
