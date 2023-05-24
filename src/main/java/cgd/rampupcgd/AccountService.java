@@ -30,17 +30,19 @@ public class AccountService {
       throw new IllegalArgumentException("This account does not exist");
   }
 
-  public AccountDto addAccount(Account account) {
-    return AccountDtoMapper.INSTANCE.toAccountDto(accountsRepository.save(account));
+  public AccountDto addAccount(AccountDto accountDto) {
+    accountsRepository.save(AccountDtoMapper.INSTANCE.toAccount(accountDto));
+    return accountDto;
   }
 
-  public AccountDto updateAccount(Long id, Account updateAccount) throws AccountNotFoundException {
-      Account account = accountsRepository.findById(id)
-          .orElseThrow(() -> new AccountNotFoundException(id));
+  public AccountDto updateAccount(Long id, AccountDto updateAccountDto) throws AccountNotFoundException {
+    Account account = accountsRepository.findById(id)
+        .orElseThrow(() -> new AccountNotFoundException(id));
 
-      account.setOwner(updateAccount.getOwner());
-      account.setBalance(updateAccount.getBalance());
-      return AccountDtoMapper.INSTANCE.toAccountDto(account);
+    account.setOwner(updateAccountDto.getOwner());
+    account.setBalance(updateAccountDto.getBalance());
+    accountsRepository.save(account);
+    return AccountDtoMapper.INSTANCE.toAccountDto(account);
   }
 
   public void deletedAccount(Long id) {

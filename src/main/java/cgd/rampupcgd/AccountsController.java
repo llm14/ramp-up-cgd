@@ -41,8 +41,8 @@ public class AccountsController {
   }
 
   @PostMapping
-  public ResponseEntity<AccountDto> addAccount(@RequestBody Account account) {
-    return new ResponseEntity<>(accountService.addAccount(account), HttpStatus.CREATED);
+  public ResponseEntity<AccountDto> addAccount(@RequestBody AccountDto accountDto) {
+    return new ResponseEntity<>(accountService.addAccount(accountDto), HttpStatus.CREATED);
   }
 
   @PutMapping("/{id}")
@@ -56,8 +56,8 @@ public class AccountsController {
               array = @ArraySchema(
                   schema = @Schema(implementation = AccountNotFoundException.class))))
   })
-  public ResponseEntity<AccountDto> updateAccount(@PathVariable Long id, @RequestBody Account updateAccount) {
-    return new ResponseEntity<>(accountService.updateAccount(id, updateAccount), HttpStatus.OK);
+  public ResponseEntity<AccountDto> updateAccount(@PathVariable Long id, @RequestBody AccountDto updateAccountDto) {
+    return new ResponseEntity<>(accountService.updateAccount(id, updateAccountDto), HttpStatus.OK);
   }
 
   @DeleteMapping("/{id}")
