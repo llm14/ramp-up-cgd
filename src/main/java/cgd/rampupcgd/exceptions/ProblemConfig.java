@@ -8,17 +8,17 @@ import org.zalando.problem.violations.ConstraintViolationProblemModule;
 @Configuration
 public class ProblemConfig {
 
-  @Bean
-  ProblemModule problemModule() {
-    final ProblemModule module = new ProblemModule();
+    @Bean
+    ProblemModule problemModule() {
+        final ProblemModule module = new ProblemModule();
 
-    // do not show stacktraces
-    module.withStackTraces(false);
-    return module;
-  }
+        // do not show stacktraces
+        module.withStackTraces(false);
+        return module;
+    }
 
-  @Bean
-  ConstraintViolationProblemModule constraintViolationProblemModule() {
-    return new ConstraintViolationProblemModule();
-  }
+    @Bean
+    ConstraintViolationProblemModule constraintViolationProblemModule() {
+        return new ConstraintViolationProblemModule();
+    }
 }

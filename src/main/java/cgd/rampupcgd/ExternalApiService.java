@@ -7,6 +7,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 @FeignClient(name = "external-api-service", url = "https://jsonplaceholder.typicode.com/todos")
 public interface ExternalApiService {
 
-  @GetMapping(value = "/1")
-  ExternalRandomObject getJsonFromExternalApi();
+    @GetMapping(value = "/1")
+    ExternalRandomObject getJsonFromExternalApi();
 }

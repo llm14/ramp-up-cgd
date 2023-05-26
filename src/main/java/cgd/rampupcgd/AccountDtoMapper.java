@@ -14,6 +14,6 @@ public interface AccountDtoMapper {
 
   List<AccountDto> toAccountDtoList (List<Account> accountList);
 
-  Account toAccount (AccountDto accountDto);
+  Account toAccount(AccountDto accountDto);
 
 }

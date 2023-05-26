@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class AccountDto {
 
-  String owner;
-  Long balance;
+    String owner;
+    Long balance;
 
 }

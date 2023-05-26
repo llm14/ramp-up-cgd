@@ -14,6 +14,4 @@ public class ExternalRandomObject {
   private String title;
   private boolean completed;
 
-
-
 }
